@@ -42,7 +42,7 @@ shape = SubResource("WorldBoundaryShape2D_gprl0")
 [node name="WallR" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_pp80x")
 
-[node name="PlayArea" type="Area2D" parent="."]
+[node name="PlayArea" type="Area2D" parent="." groups=["PlayArea"]]
 collision_layer = 64
 collision_mask = 0
 

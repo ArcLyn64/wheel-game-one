@@ -26,9 +26,12 @@ extends Area2D
 var speed:float = initial_speed
 var _time_passed:float = 0.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-    pass # Replace with function body.
+    area_exited.connect(_check_exited_play_area)
+
+func _check_exited_play_area(area:Area2D):
+    if area.is_in_group('PlayArea'):
+        get_tree().create_timer(1.0).timeout.connect(destroy.bind(true))
 
 func _display_polarity():
     if polarity_w:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://btgpwtf1gnit5"]
 
-[ext_resource type="Script" path="res://audio_manager.gd" id="1_c5y3g"]
+[ext_resource type="Script" path="res://util/audio_manager.gd" id="1_c5y3g"]
 
 [node name="AudioHandler" type="Node"]
 process_mode = 3

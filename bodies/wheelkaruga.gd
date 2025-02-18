@@ -62,9 +62,7 @@ func make_bullet(_position:Vector2):
     bullet.polarity_w = self.polarity_w
     SignalBus.make_bullet.emit(self, bullet, _position)
 
-
 func _fire():
-    print_debug(fire_power)
     match fire_power:
         1:
             make_bullet(Vector2(0, -65))
