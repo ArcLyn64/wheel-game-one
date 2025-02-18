@@ -13,19 +13,21 @@ script = ExtResource("1_4ao4x")
 polarity_w = false
 size = 70.0
 fire_rate = 1.0
+point_value = null
 w_color = Color(0.695503, 0.695503, 0.695503, 1)
 b_color = Color(0.162066, 0.162066, 0.162066, 1)
 display = NodePath("Display")
 hurtbox = NodePath("Hurtbox")
 
 [node name="Hurtbox" type="CollisionShape2D" parent="."]
+visible = false
 rotation = -1.27927
 shape = SubResource("CircleShape2D_rtxrm")
 debug_color = Color(1, 0.00226397, 0.0755078, 0.42)
 
 [node name="Display" type="Polygon2D" parent="."]
 modulate = Color(0.162066, 0.162066, 0.162066, 1)
-rotation = 5675.36
+rotation = 6914.27
 polygon = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 script = ExtResource("1_ph8qr")
 polarity_w = false

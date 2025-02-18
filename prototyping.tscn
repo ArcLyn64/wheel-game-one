@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://c4xsfl4hqnlou"]
+[gd_scene load_steps=22 format=3 uid="uid://c4xsfl4hqnlou"]
 
 [ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
 [ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
 [ext_resource type="Script" path="res://handlers/bullet_master.gd" id="2_m0l5e"]
 [ext_resource type="FontFile" uid="uid://rambf55exqdn" path="res://assets/fonts/LTStopwatch-Regular.ttf" id="2_noei1"]
 [ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="3_s3ych"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="5_0xhhh"]
 [ext_resource type="Script" path="res://ui/icon_counter.gd" id="6_krvt7"]
 
 [sub_resource type="Gradient" id="Gradient_p0j4m"]
@@ -208,6 +209,8 @@ script = ExtResource("2_m0l5e")
 
 [node name="SquareEnemy" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("3_s3ych")]
 position = Vector2(352, 212)
+point_value = 100
+death_effect = ExtResource("5_0xhhh")
 
 [node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("1_hrx8i")]
 position = Vector2(368, 1003)
@@ -257,7 +260,6 @@ size_flags_vertical = 8
 theme_override_constants/separation = 15
 script = ExtResource("6_krvt7")
 items = [NodePath("TextureRect6"), NodePath("TextureRect5"), NodePath("TextureRect4"), NodePath("TextureRect3"), NodePath("TextureRectMax")]
-value = 3
 global_signal = &"lives_update"
 
 [node name="TextureRectMax" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]

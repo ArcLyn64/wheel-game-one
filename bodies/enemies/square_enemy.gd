@@ -15,6 +15,7 @@ extends Area2D
         size = v
         _update_appearance()
 @export var fire_rate:float = 3.0
+@export var point_value:int = 100
 
 @export_group('colors')
 @export var w_color:Color :
@@ -33,6 +34,10 @@ extends Area2D
 @export_group('components')
 @export var display:SpinningSquare
 @export var hurtbox:CollisionShape2D
+
+@export_group('effects')
+@export var death_effect:PackedScene = load('res://effects/pop_effect.tscn')
+@export var effect_spawn_point:Node2D = null
 
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/ball.tscn')
 
@@ -59,7 +64,10 @@ func _handle_collision(a:Area2D):
     if a is Bullet:
         if _in_play_area():
             health -= a.damage
+            var matching = a.polarity_w == self.polarity_w
             a.destroy()
+            if health < 0:
+                die(matching)
         else:
             a.despawn()
 
@@ -69,12 +77,25 @@ func _instantiate_bullet(_direction:Vector2):
     bullet.direction = _direction
     SignalBus.make_bullet.emit(self, bullet, Vector2.ZERO)
 
+func die(matching:bool, despawn:bool = false):
+    if not despawn and death_effect:
+        SignalBus.award_points.emit(point_value * (2 if matching else 1))
+        var effect = death_effect.instantiate()
+        effect.modulate = display.modulate
+        if effect_spawn_point:
+            effect.position = self.position + effect_spawn_point.position
+        else:
+            effect.position = self.position
+        effect.radius = size / 2
+        get_parent().add_child(effect)
+    queue_free()   
+
+
 func _fire():
     var target = PlayerInfo.player_location(self)
     _instantiate_bullet(target)
     _instantiate_bullet(target.rotated(deg_to_rad(20)))
     _instantiate_bullet(target.rotated(deg_to_rad(-20)))
-
 
 func _handle_fire(delta:float):
     _fire_rate_timer -= delta
