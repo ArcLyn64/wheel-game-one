@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1rdu52dl0rgk"]
+
+[ext_resource type="Script" path="res://effects/pop_effect.gd" id="1_svsr4"]
+[ext_resource type="Script" path="res://util/Circle2D.gd" id="2_rfbsm"]
+
+[node name="Pop-effect" type="Node2D"]
+script = ExtResource("1_svsr4")
+
+[node name="Circle2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, -30, 6.44911, -29.2986, 12.5967, -27.2273, 18.1552, -23.8828, 22.8649, -19.4216, 26.5054, -14.0523, 28.9065, -8.02585, 29.956, -1.62417, 29.6048, 4.85346, 27.8693, 11.1041, 24.8307, 16.8356, 20.631, 21.7799, 15.4666, 25.7057, 9.57904, 28.4296, 3.24357, 29.8241, -3.24357, 29.8241, -9.57904, 28.4296, -15.4666, 25.7057, -20.631, 21.7799, -24.8307, 16.8356, -27.8693, 11.1041, -29.6048, 4.85346, -29.956, -1.62417, -28.9065, -8.02585, -26.5054, -14.0522, -22.8649, -19.4216, -18.1552, -23.8828, -12.5967, -27.2273, -6.44911, -29.2986, -2.38419e-06, -30)
+closed = true
+width = 60.0
+joint_mode = 2
+script = ExtResource("2_rfbsm")
+radius = 30.0
+fidelity = 30

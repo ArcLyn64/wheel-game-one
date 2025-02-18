@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8nokfx7d8hkl"]
+
+[ext_resource type="Script" path="res://bodies/bullets/bullet_base.gd" id="1_dnddt"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="2_kvgof"]
+
+[node name="Needle" type="Area2D"]
+modulate = Color(0.762404, 0.762404, 0.762404, 1)
+rotation = -1.5708
+collision_layer = 8
+collision_mask = 96
+script = ExtResource("1_dnddt")
+w_color = Color(0.762404, 0.762404, 0.762404, 1)
+b_color = Color(0.212305, 0.212305, 0.212305, 1)
+death_effect = ExtResource("2_kvgof")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(41, 0, 0, -8, -14, 0, 0, 8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(41, 0, 0, -8, -14, 0, 0, 8)

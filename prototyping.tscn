@@ -1,0 +1,268 @@
+[gd_scene load_steps=19 format=3 uid="uid://c4xsfl4hqnlou"]
+
+[ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
+[ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
+[ext_resource type="Script" path="res://handlers/bullet_master.gd" id="2_m0l5e"]
+[ext_resource type="FontFile" uid="uid://rambf55exqdn" path="res://assets/fonts/LTStopwatch-Regular.ttf" id="2_noei1"]
+
+[sub_resource type="Gradient" id="Gradient_p0j4m"]
+colors = PackedColorArray(1, 1, 1, 1, 0.340339, 0.340339, 0.340339, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wtjj1"]
+gradient = SubResource("Gradient_p0j4m")
+width = 1024
+height = 1024
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_umup8"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.155844, 0.220779, 0.551948, 0.876623)
+colors = PackedColorArray(0.59, 0.59, 0.59, 0, 0.593134, 0.593134, 0.593134, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ehark"]
+gradient = SubResource("Gradient_umup8")
+width = 32
+height = 32
+fill_from = Vector2(1, 1)
+fill_to = Vector2(0.0733945, 0.0779817)
+
+[sub_resource type="Gradient" id="Gradient_rcypa"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.155844, 0.220779, 0.551948, 0.876623)
+colors = PackedColorArray(0.59, 0.59, 0.59, 0, 0.593134, 0.593134, 0.593134, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nmlv7"]
+gradient = SubResource("Gradient_rcypa")
+width = 32
+height = 32
+fill_from = Vector2(0.353211, 0.357798)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_3k60i"]
+offsets = PackedFloat32Array(0.00649351, 1)
+colors = PackedColorArray(0.482712, 1.8049e-07, 0.176466, 1, 0.914199, 0.362604, 0.241199, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qjlfw"]
+gradient = SubResource("Gradient_3k60i")
+fill_from = Vector2(0.458716, 0)
+fill_to = Vector2(0.559633, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_iqh3w"]
+base_font = ExtResource("2_noei1")
+spacing_bottom = -10
+
+[sub_resource type="LabelSettings" id="LabelSettings_584e2"]
+font = SubResource("FontVariation_iqh3w")
+font_size = 72
+shadow_size = 5
+shadow_color = Color(0.349442, 0, 0.170426, 1)
+shadow_offset = Vector2(3, 3)
+
+[sub_resource type="Gradient" id="Gradient_8k1ik"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.136364, 0.668831, 0.876623)
+colors = PackedColorArray(0.59, 0.59, 0.59, 0, 0.593134, 0.593134, 0.593134, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vpb5u"]
+gradient = SubResource("Gradient_8k1ik")
+width = 32
+height = 32
+fill_from = Vector2(0, 1)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_ihq5b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.155844, 0.220779, 0.402597, 0.824675)
+colors = PackedColorArray(0.59, 0.59, 0.59, 0, 0.593134, 0.593134, 0.593134, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a36h4"]
+gradient = SubResource("Gradient_ihq5b")
+width = 32
+height = 32
+fill_from = Vector2(0, 0.348624)
+fill_to = Vector2(1, 0.357798)
+
+[node name="Prototyping" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.20871, 0.20871, 0.20871, 1)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_wtjj1")
+
+[node name="MainUIElements" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="LeftUI" type="MarginContainer" parent="MainUIElements"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="EnergyBar" type="VBoxContainer" parent="MainUIElements/LeftUI"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_constants/separation = 15
+
+[node name="TextureRectMax" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_ehark")
+
+[node name="TextureRect2" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect3" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect4" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect5" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect6" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect7" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect8" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="TextureRect9" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_nmlv7")
+
+[node name="GameAreaContainer" type="AspectRatioContainer" parent="MainUIElements"]
+clip_children = 1
+custom_minimum_size = Vector2(756, 1080)
+layout_mode = 2
+ratio = 0.7
+stretch_mode = 1
+
+[node name="PlayAreaBorder" parent="MainUIElements/GameAreaContainer" node_paths=PackedStringArray("determines_size") instance=ExtResource("1_i3bai")]
+process_mode = 3
+determines_size = NodePath("..")
+
+[node name="GameAreaBackground" type="TextureRect" parent="MainUIElements/GameAreaContainer"]
+custom_minimum_size = Vector2(720, 0)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_qjlfw")
+
+[node name="Entities" type="Node2D" parent="MainUIElements/GameAreaContainer"]
+
+[node name="BulletMaster" type="Node2D" parent="MainUIElements/GameAreaContainer/Entities"]
+script = ExtResource("2_m0l5e")
+
+[node name="Craft" type="Node2D" parent="MainUIElements/GameAreaContainer/Entities"]
+
+[node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/Entities/Craft" instance=ExtResource("1_hrx8i")]
+position = Vector2(368, 1003)
+
+[node name="RightUI" type="MarginContainer" parent="MainUIElements"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="LifeDisplay" type="HBoxContainer" parent="MainUIElements/RightUI"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScoreContainer" type="MarginContainer" parent="MainUIElements/RightUI/LifeDisplay"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_bottom = -10
+
+[node name="Score" type="Label" parent="MainUIElements/RightUI/LifeDisplay/ScoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "0
+0
+0
+0
+0
+0
+0
+0
+0
+0"
+label_settings = SubResource("LabelSettings_584e2")
+
+[node name="LifeContainer" type="MarginContainer" parent="MainUIElements/RightUI/LifeDisplay"]
+layout_mode = 2
+
+[node name="ResourceList" type="VBoxContainer" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 15
+
+[node name="TextureRectMax" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_vpb5u")
+
+[node name="TextureRect3" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_a36h4")
+
+[node name="TextureRect4" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_a36h4")
+
+[node name="TextureRect5" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_a36h4")
+
+[node name="TextureRect6" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_a36h4")

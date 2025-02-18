@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://drntdv43cw54v"]
+
+[ext_resource type="Script" path="res://bodies/wheelkaruga.gd" id="1_21xnb"]
+[ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot/wheel.tscn" id="1_b7gxp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_of8gw"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_soyih"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2e4v"]
+radius = 50.0
+
+[node name="Wheelkaruga" type="CharacterBody2D" node_paths=PackedStringArray("wheel", "body")]
+collision_mask = 4
+motion_mode = 1
+script = ExtResource("1_21xnb")
+skew_on_move_deg = 5.0
+skew_per_frame_deg = 0.05
+offset_on_move = 5.0
+offset_per_frame_deg = 0.5
+w_color = Color(0.89059, 0.89059, 0.89059, 1)
+b_color = Color(0.215902, 0.215902, 0.215902, 1)
+wheel = NodePath("Wheel")
+body = NodePath("ShipBody")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_of8gw")
+debug_color = Color(1.05888e-06, 0.553462, 0.646357, 0.42)
+
+[node name="Wheel" parent="." instance=ExtResource("1_b7gxp")]
+modulate = Color(0.215902, 0.215902, 0.215902, 1)
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 240.0
+offset_bottom = 240.0
+scale = Vector2(0.4, 0.4)
+wheel_scale = 0.4
+
+[node name="ShipBody" type="Line2D" parent="."]
+modulate = Color(0.89059, 0.89059, 0.89059, 1)
+self_modulate = Color(1, 1, 1, 0.584314)
+points = PackedVector2Array(0, -35, -25, 25, 0, 35, 25, 25)
+closed = true
+width = 6.0
+joint_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="SmallCollider" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallCollider"]
+visible = false
+shape = SubResource("CircleShape2D_soyih")
+debug_color = Color(0.7, 0, 0.0116665, 0.419608)
+
+[node name="LargeCollider" type="Area2D" parent="."]
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LargeCollider"]
+visible = false
+shape = SubResource("CircleShape2D_o2e4v")
+debug_color = Color(0.7, 0, 0.0116665, 0.419608)

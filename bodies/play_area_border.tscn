@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://b7agyui6o8fk"]
+
+[ext_resource type="Script" path="res://bodies/play_area_border.gd" id="1_mjjj2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_68cw0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_l7mu8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jhtp2"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gprl0"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pp80x"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poas3"]
+size = Vector2(756, 1080)
+
+[node name="PlayAreaBorder" type="StaticBody2D" node_paths=PackedStringArray("border_l", "border_t", "border_b", "border_r", "area", "area_shape")]
+collision_layer = 4
+physics_material_override = SubResource("PhysicsMaterial_68cw0")
+script = ExtResource("1_mjjj2")
+border_l = NodePath("WallL")
+border_t = NodePath("WallT")
+border_b = NodePath("WallB")
+border_r = NodePath("WallR")
+area = NodePath("PlayArea")
+area_shape = NodePath("PlayArea/AreaCollider")
+
+[node name="WallB" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1080)
+shape = SubResource("WorldBoundaryShape2D_l7mu8")
+
+[node name="WallT" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_jhtp2")
+
+[node name="WallL" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_gprl0")
+
+[node name="WallR" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_pp80x")
+
+[node name="PlayArea" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="AreaCollider" type="CollisionShape2D" parent="PlayArea"]
+shape = SubResource("RectangleShape2D_poas3")
