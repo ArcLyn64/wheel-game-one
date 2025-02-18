@@ -28,6 +28,10 @@
 @export var offset_per_frame_deg:float = 5.0
 @export var fire_rate:float = 0.05
 
+@export_group('effects')
+@export var death_effect:PackedScene = load('res://effects/pop_effect.tscn')
+@export var effect_spawn_point:Node2D = null
+
 @export_group('colors')
 @export var w_color:Color 
 @export var b_color:Color 
@@ -35,6 +39,8 @@
 @export_group('components')
 @export var wheel:Wheel
 @export var body:Node2D
+@export var small_hurtbox:Area2D
+@export var large_hurtbox:Area2D
 
 signal polarity_update(is_white:bool)
 signal firepower_update(power:int)
@@ -47,6 +53,8 @@ func _ready() -> void:
     if wheel:
         wheel.new_dir_chosen.connect(_handle_wheel_input)
         wheel.puzzle_finished.connect(_handle_wheel_full)
+    if small_hurtbox: small_hurtbox.area_entered.connect(_handle_collision_small_area)
+    if large_hurtbox: small_hurtbox.area_entered.connect(_handle_collision_large_area)
 
 func _handle_movement():
     var direction := Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
@@ -115,6 +123,20 @@ func _handle_fire_input(delta:float):
 func _handle_wheel_full():
     wheel.reset()
     wheel.rotate_slices()
+
+func die():
+    pass
+
+# destroy matching bullets and add their damage to score
+func _handle_collision_large_area(area:Area2D):
+    if area is Bullet and area.polarity_w == self.polarity_w:
+        SignalBus.award_points.emit(area.damage)
+        area.destroy()
+
+# die to mismatched bullets or intersecting with craft
+func _handle_collision_small_area(area:Area2D):
+    if area is Bullet and area.polarity_w != self.polarity_w:
+        die()
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return

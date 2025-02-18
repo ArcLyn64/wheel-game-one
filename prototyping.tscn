@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4xsfl4hqnlou"]
+[gd_scene load_steps=23 format=3 uid="uid://c4xsfl4hqnlou"]
 
 [ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
 [ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="3_s3ych"]
 [ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="5_0xhhh"]
 [ext_resource type="Script" path="res://ui/icon_counter.gd" id="6_krvt7"]
+[ext_resource type="Script" path="res://ui/score_meter.gd" id="8_lfc77"]
 
 [sub_resource type="Gradient" id="Gradient_p0j4m"]
 colors = PackedColorArray(1, 1, 1, 1, 0.340339, 0.340339, 0.340339, 1)
@@ -210,6 +211,8 @@ script = ExtResource("2_m0l5e")
 [node name="SquareEnemy" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("3_s3ych")]
 position = Vector2(352, 212)
 point_value = 100
+w_color = Color(0, 0, 0, 1)
+b_color = Color(0, 0, 0, 1)
 death_effect = ExtResource("5_0xhhh")
 
 [node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("1_hrx8i")]
@@ -231,6 +234,7 @@ theme_override_constants/separation = 15
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme_override_constants/margin_left = -10
 theme_override_constants/margin_bottom = -10
 
 [node name="Score" type="Label" parent="MainUIElements/RightUI/LifeDisplay/ScoreContainer"]
@@ -248,6 +252,7 @@ text = "0
 0
 0"
 label_settings = SubResource("LabelSettings_584e2")
+script = ExtResource("8_lfc77")
 
 [node name="LifeContainer" type="MarginContainer" parent="MainUIElements/RightUI/LifeDisplay"]
 layout_mode = 2
