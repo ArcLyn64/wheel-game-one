@@ -44,6 +44,7 @@ signal firepower_update(power:int)
 var _fire_rate_timer = 0.0
 
 func _ready() -> void:
+    PlayerInfo.attach_player(self)
     if wheel:
         wheel.new_dir_chosen.connect(_handle_wheel_input)
         wheel.puzzle_finished.connect(_handle_wheel_full)
@@ -55,9 +56,9 @@ func _handle_movement():
     body.position.y = move_toward(body.position.y, -direction.y * offset_on_move, offset_per_frame_deg)
 
 func _mega_laser(_strength:int):
-    pass
+    pass # TODO
 
-func make_bullet(_position:Vector2):
+func _instantiate_bullet(_position:Vector2):
     var bullet:Bullet = bullet_scene.instantiate()
     bullet.polarity_w = self.polarity_w
     SignalBus.make_bullet.emit(self, bullet, _position)
@@ -65,19 +66,19 @@ func make_bullet(_position:Vector2):
 func _fire():
     match fire_power:
         1:
-            make_bullet(Vector2(0, -65))
+            _instantiate_bullet(Vector2(0, -65))
         2:
-            make_bullet(Vector2(10, -65))
-            make_bullet(Vector2(-10, -65))
+            _instantiate_bullet(Vector2(10, -65))
+            _instantiate_bullet(Vector2(-10, -65))
         3:
-            make_bullet(Vector2(0, -65))
-            make_bullet(Vector2(20, -60))
-            make_bullet(Vector2(-20, -60))
+            _instantiate_bullet(Vector2(0, -65))
+            _instantiate_bullet(Vector2(20, -60))
+            _instantiate_bullet(Vector2(-20, -60))
         4:
-            make_bullet(Vector2(10, -65))
-            make_bullet(Vector2(-10, -65))
-            make_bullet(Vector2(20, -60))
-            make_bullet(Vector2(-20, -60))
+            _instantiate_bullet(Vector2(10, -65))
+            _instantiate_bullet(Vector2(-10, -65))
+            _instantiate_bullet(Vector2(20, -60))
+            _instantiate_bullet(Vector2(-20, -60))
 
 func _charge(strength:int):
     match strength:

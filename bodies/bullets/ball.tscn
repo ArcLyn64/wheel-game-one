@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://ccme56t3608ar"]
+
+[ext_resource type="Script" path="res://bodies/bullets/bullet_base.gd" id="1_uvi33"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="2_prexo"]
+[ext_resource type="Script" path="res://util/Circle2D.gd" id="3_d3oy1"]
+
+[sub_resource type="Curve" id="Curve_j4dhj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.386139, 0.527472), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aff8b"]
+radius = 15.0
+
+[node name="Ball" type="Area2D"]
+modulate = Color(0.77084, 0.770839, 0.770839, 1)
+collision_layer = 16
+collision_mask = 67
+script = ExtResource("1_uvi33")
+initial_speed = 600.0
+speed_curve = SubResource("Curve_j4dhj")
+w_color = Color(0.77084, 0.770839, 0.770839, 1)
+b_color = Color(0.136826, 0.136826, 0.136826, 1)
+death_effect = ExtResource("2_prexo")
+
+[node name="OuterRing" type="Line2D" parent="."]
+points = PackedVector2Array(0, -15, 4.87049, -14.1873, 9.21319, -11.8371, 12.5575, -8.20422, 14.541, -3.68228, 14.9488, 1.23869, 13.7366, 6.02543, 11.0359, 10.1592, 7.13921, 13.1921, 2.46892, 14.7954, -2.46892, 14.7954, -7.13921, 13.1921, -11.0359, 10.1592, -13.7366, 6.02543, -14.9488, 1.23869, -14.541, -3.68228, -12.5575, -8.20422, -9.21319, -11.8371, -4.87049, -14.1873, 0, -15)
+closed = true
+width = 3.0
+joint_mode = 2
+script = ExtResource("3_d3oy1")
+radius = 15.0
+fidelity = 20
+
+[node name="InnerRing" type="Line2D" parent="."]
+points = PackedVector2Array(0, -5, 3.21394, -3.83022, 4.92404, -0.868241, 4.33013, 2.5, 1.7101, 4.69846, -1.7101, 4.69846, -4.33013, 2.5, -4.92404, -0.86824, -3.21394, -3.83022, -7.15256e-07, -5)
+closed = true
+joint_mode = 2
+script = ExtResource("3_d3oy1")
+radius = 5.0
+fidelity = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_aff8b")

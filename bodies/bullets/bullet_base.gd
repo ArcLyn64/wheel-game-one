@@ -8,13 +8,17 @@ extends Area2D
         polarity_w = v
         _display_polarity()
 
+@export_group('properties')
+@export var damage:float = 1.0
+
 @export_group('travel')
 @export var direction:Vector2 = Vector2.UP :
     set(v):
         direction = v
         look_at(position + direction)
 @export var initial_speed:float = 1200.0
-@export var acceleration_curve:Curve = null
+@export var speed_curve:Curve = null
+@export var speed_curve_time:float = 1
 
 @export_group('colors')
 @export var w_color:Color 
@@ -22,6 +26,7 @@ extends Area2D
 
 @export_group('effects')
 @export var death_effect:PackedScene = load('res://effects/pop_effect.tscn')
+@export var effect_spawn_point:Node2D = null
 
 var speed:float = initial_speed
 var _time_passed:float = 0.0
@@ -41,18 +46,25 @@ func _display_polarity():
 
 func _handle_motion(delta: float):
     _time_passed += delta
-    if acceleration_curve and acceleration_curve.min_value > _time_passed and acceleration_curve.max_value < _time_passed:
-        speed += acceleration_curve.sample(_time_passed)
+    if speed_curve and _time_passed < speed_curve_time:
+        speed = initial_speed * speed_curve.sample(_time_passed / speed_curve_time)
+        print_debug(speed)
     self.position += direction.normalized() * speed * delta
 
-func destroy(despawn:bool = false):
-    if not despawn and death_effect:
+func destroy(_despawn:bool = false):
+    if not _despawn and death_effect:
         var effect = death_effect.instantiate()
         effect.modulate = self.modulate
-        effect.position = self.position
+        if effect_spawn_point:
+            effect.position = self.position + effect_spawn_point.position
+        else:
+            effect.position = self.position
         effect.radius = 10
         get_parent().add_child(effect)
     queue_free()
+
+## alias for destroy(true)
+func despawn(): destroy(true)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
