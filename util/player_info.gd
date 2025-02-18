@@ -2,6 +2,11 @@ extends Node
 
 var player:Wheelkaruga = null
 
+var lives:int = 3 :
+    set(v):
+        lives = clampi(v, 0, 5)
+        SignalBus.lives_update.emit(lives)
+
 func attach_player(p:Wheelkaruga):
     player = p
 

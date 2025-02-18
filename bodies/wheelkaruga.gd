@@ -13,8 +13,8 @@
         polarity_update.emit(polarity_w)
 @export_range(0, 9) var charge:int = 0 :
     set(v):
-        charge = v
-        charge_update.emit(charge)
+        charge = min(max(0, v), 9)
+        SignalBus.energy_update.emit(charge)
 @export_range(1, 4) var fire_power:int = 2 :
     set(v):
         fire_power = v
@@ -36,7 +36,6 @@
 @export var wheel:Wheel
 @export var body:Node2D
 
-signal charge_update(charge:int)
 signal polarity_update(is_white:bool)
 signal firepower_update(power:int)
 

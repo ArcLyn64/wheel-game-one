@@ -48,7 +48,6 @@ func _handle_motion(delta: float):
     _time_passed += delta
     if speed_curve and _time_passed < speed_curve_time:
         speed = initial_speed * speed_curve.sample(_time_passed / speed_curve_time)
-        print_debug(speed)
     self.position += direction.normalized() * speed * delta
 
 func destroy(_despawn:bool = false):

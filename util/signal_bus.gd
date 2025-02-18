@@ -5,3 +5,6 @@ signal clear_all_bullets()
 
 signal award_points(points:int)
 signal reset_score()
+
+signal lives_update(lives:int)
+signal energy_update(energy:int)

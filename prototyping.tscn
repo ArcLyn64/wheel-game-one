@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://c4xsfl4hqnlou"]
+[gd_scene load_steps=21 format=3 uid="uid://c4xsfl4hqnlou"]
 
 [ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
 [ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
 [ext_resource type="Script" path="res://handlers/bullet_master.gd" id="2_m0l5e"]
 [ext_resource type="FontFile" uid="uid://rambf55exqdn" path="res://assets/fonts/LTStopwatch-Regular.ttf" id="2_noei1"]
 [ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="3_s3ych"]
+[ext_resource type="Script" path="res://ui/icon_counter.gd" id="6_krvt7"]
 
 [sub_resource type="Gradient" id="Gradient_p0j4m"]
 colors = PackedColorArray(1, 1, 1, 1, 0.340339, 0.340339, 0.340339, 1)
@@ -107,62 +108,74 @@ theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="EnergyBar" type="VBoxContainer" parent="MainUIElements/LeftUI"]
+[node name="EnergyBar" type="VBoxContainer" parent="MainUIElements/LeftUI" node_paths=PackedStringArray("items")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_constants/separation = 15
+script = ExtResource("6_krvt7")
+items = [NodePath("TextureRect9"), NodePath("TextureRect8"), NodePath("TextureRect7"), NodePath("TextureRect6"), NodePath("TextureRect5"), NodePath("TextureRect4"), NodePath("TextureRect3"), NodePath("TextureRect2"), NodePath("TextureRectMax")]
+global_signal = &"energy_update"
 
 [node name="TextureRectMax" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_ehark")
 
 [node name="TextureRect2" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect3" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect4" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect5" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect6" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect7" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect8" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_nmlv7")
 
 [node name="TextureRect9" type="TextureRect" parent="MainUIElements/LeftUI/EnergyBar"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
@@ -236,20 +249,26 @@ label_settings = SubResource("LabelSettings_584e2")
 [node name="LifeContainer" type="MarginContainer" parent="MainUIElements/RightUI/LifeDisplay"]
 layout_mode = 2
 
-[node name="ResourceList" type="VBoxContainer" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer"]
+[node name="ResourceList" type="VBoxContainer" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer" node_paths=PackedStringArray("items")]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 theme_override_constants/separation = 15
+script = ExtResource("6_krvt7")
+items = [NodePath("TextureRect6"), NodePath("TextureRect5"), NodePath("TextureRect4"), NodePath("TextureRect3"), NodePath("TextureRectMax")]
+value = 3
+global_signal = &"lives_update"
 
 [node name="TextureRectMax" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_vpb5u")
 
 [node name="TextureRect3" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3

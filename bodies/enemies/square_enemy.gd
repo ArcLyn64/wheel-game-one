@@ -36,7 +36,7 @@ extends Area2D
 
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/ball.tscn')
 
-var _fire_rate_timer = fire_rate
+var _fire_rate_timer = 1.0
 
 func _ready() -> void:
     _update_appearance()
@@ -72,8 +72,8 @@ func _instantiate_bullet(_direction:Vector2):
 func _fire():
     var target = PlayerInfo.player_location(self)
     _instantiate_bullet(target)
-    _instantiate_bullet(target.rotated(deg_to_rad(30)))
-    _instantiate_bullet(target.rotated(deg_to_rad(-30)))
+    _instantiate_bullet(target.rotated(deg_to_rad(20)))
+    _instantiate_bullet(target.rotated(deg_to_rad(-20)))
 
 
 func _handle_fire(delta:float):
