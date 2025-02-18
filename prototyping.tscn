@@ -208,15 +208,18 @@ script = ExtResource("2_m0l5e")
 
 [node name="Craft" type="Node2D" parent="MainUIElements/GameAreaContainer/EntitiyCropper"]
 
+[node name="PlayerSpawnPoint" type="Node2D" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft"]
+position = Vector2(380, 950)
+
+[node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft/PlayerSpawnPoint" instance=ExtResource("1_hrx8i")]
+death_effect = ExtResource("5_0xhhh")
+
 [node name="SquareEnemy" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("3_s3ych")]
 position = Vector2(352, 212)
 point_value = 100
-w_color = Color(0, 0, 0, 1)
-b_color = Color(0, 0, 0, 1)
+w_color = Color(0.695503, 0.695503, 0.695503, 1)
+b_color = Color(0.162066, 0.162066, 0.162066, 1)
 death_effect = ExtResource("5_0xhhh")
-
-[node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("1_hrx8i")]
-position = Vector2(368, 1003)
 
 [node name="RightUI" type="MarginContainer" parent="MainUIElements"]
 custom_minimum_size = Vector2(500, 0)

@@ -18,12 +18,26 @@ extends Area2D
 @export var point_value:int = 100
 
 @export_group('colors')
-@export var w_color:Color = Color.WHITE
-@export var b_color:Color = Color.BLACK
+@export var w_color:Color :
+    set(v):
+        if display: display.w_color = v
+    get():
+        if display: return display.w_color
+        else: return Color.WHITE
+@export var b_color:Color :
+    set(v):
+        if display: display.b_color = v
+    get():
+        if display: return display.b_color
+        else: return Color.BLACK
 
 @export_group('effects')
 @export var death_effect:PackedScene = load('res://effects/pop_effect.tscn')
 @export var effect_spawn_point:Node2D = null
+
+@export_group('components')
+@export var hurtbox:CollisionShape2D
+@export var display:SpinningShape
 
 func _ready() -> void:
     _update_appearance()
@@ -31,13 +45,11 @@ func _ready() -> void:
     area_entered.connect(_handle_collision)
 
 func _update_appearance():
-    print_debug("this enemy did not implement _update_appearance: " + str(self))
+    if display: display.size = Vector2.ONE * size
+    if hurtbox: hurtbox.shape.radius = size * 1.41 / 2
 
 func _display_polarity():
-    if polarity_w:
-        self.modulate = w_color    
-    else:
-        self.modulate = b_color
+    if display: display.polarity_w = polarity_w
 
 func _in_play_area():
     for a in get_overlapping_areas():
@@ -59,7 +71,7 @@ func die(matching:bool, despawn:bool = false):
     if not despawn and death_effect:
         SignalBus.award_points.emit(point_value * (2 if matching else 1))
         var effect = death_effect.instantiate()
-        effect.modulate = w_color if polarity_w else b_color
+        effect.modulate = display.modulate
         if effect_spawn_point:
             effect.position = self.position + effect_spawn_point.position
         else:

@@ -2,25 +2,9 @@
 class_name SquareEnemy
 extends Enemy
 
-@export_group('properties')
-
-@export_group('components')
-@export var display:SpinningSquare
-@export var hurtbox:CollisionShape2D
-
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/ball.tscn')
 
 var _fire_rate_timer = 0.5
-
-func _update_appearance():
-    if display: display.size = Vector2.ONE * size
-    if hurtbox: hurtbox.shape.radius = size * 1.41 / 2
-
-func _display_polarity():
-    if display:
-        display.polarity_w = polarity_w
-        w_color = display.w_color
-        b_color = display.b_color
 
 func _instantiate_bullet(_direction:Vector2):
     var bullet:Bullet = bullet_scene.instantiate()

@@ -46,6 +46,16 @@ signal polarity_update(is_white:bool)
 signal firepower_update(power:int)
 
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/needle.tscn')
+
+var enabled:bool = true :
+    set(v):
+        if v and enabled != v:
+            enabled = v
+            enable()
+        elif not v and enabled != v:
+            enabled = v
+            disable()
+
 var _fire_rate_timer = 0.0
 
 func _ready() -> void:
@@ -124,9 +134,6 @@ func _handle_wheel_full():
     wheel.reset()
     wheel.rotate_slices()
 
-func die():
-    pass
-
 # destroy matching bullets and add their damage to score
 func _handle_collision_large_area(area:Area2D):
     if area is Bullet and area.polarity_w == self.polarity_w:
@@ -137,6 +144,55 @@ func _handle_collision_large_area(area:Area2D):
 func _handle_collision_small_area(area:Area2D):
     if area is Bullet and area.polarity_w != self.polarity_w:
         die()
+    if area is Enemy:
+        area.die()
+        die()
+
+func disable():
+    enabled = false
+    small_hurtbox.monitorable = false
+    small_hurtbox.monitoring = false
+    large_hurtbox.monitorable = false
+    large_hurtbox.monitoring = false
+
+func enable():
+    enabled = true
+    small_hurtbox.monitorable = true
+    small_hurtbox.monitoring = true
+    large_hurtbox.monitorable = true
+    large_hurtbox.monitoring = true
+
+func die():
+    # do the death effect
+    if not enabled: return
+    var effect = death_effect.instantiate()
+    effect.modulate = w_color if polarity_w else b_color
+    if effect_spawn_point:
+        effect.position = self.position + effect_spawn_point.position
+    else:
+        effect.position = self.position
+    effect.radius = 50
+    get_parent().add_child(effect)
+
+    # hide ourselves
+    hide()
+    disable()
+    
+    # wait a sec
+    await get_tree().create_timer(2.0).timeout
+    
+    # return us to the middle center and respawn us
+    show()
+    position = Vector2.ZERO
+    self.modulate.a = 0.5
+
+    # wait a sec
+    await get_tree().create_timer(2.0).timeout
+    
+    # become hittable again
+    self.modulate.a = 1
+    enable()
+
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return
