@@ -150,6 +150,7 @@ func _handle_collision_small_area(area:Area2D):
 
 func disable():
     enabled = false
+    wheel.input_enabled = false
     small_hurtbox.monitorable = false
     small_hurtbox.monitoring = false
     large_hurtbox.monitorable = false
@@ -157,6 +158,7 @@ func disable():
 
 func enable():
     enabled = true
+    wheel.input_enabled = true
     small_hurtbox.monitorable = true
     small_hurtbox.monitoring = true
     large_hurtbox.monitorable = true
@@ -173,21 +175,27 @@ func die():
         effect.position = self.position
     effect.radius = 50
     get_parent().add_child(effect)
-
+    
     # hide ourselves
     hide()
     disable()
     
+    PlayerInfo.lives -= 1
+    if PlayerInfo.lives <= 0:
+        SignalBus.game_over.emit()
+        return
+    
     # wait a sec
-    await get_tree().create_timer(2.0).timeout
+    await get_tree().create_timer(1.0).timeout
     
     # return us to the middle center and respawn us
+    wheel.reset()
     show()
     position = Vector2.ZERO
     self.modulate.a = 0.5
 
     # wait a sec
-    await get_tree().create_timer(2.0).timeout
+    await get_tree().create_timer(1.0).timeout
     
     # become hittable again
     self.modulate.a = 1

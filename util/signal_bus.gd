@@ -8,3 +8,5 @@ signal reset_score()
 
 signal lives_update(lives:int)
 signal energy_update(energy:int)
+
+signal game_over()

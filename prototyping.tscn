@@ -212,6 +212,7 @@ script = ExtResource("2_m0l5e")
 position = Vector2(380, 950)
 
 [node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft/PlayerSpawnPoint" instance=ExtResource("1_hrx8i")]
+position = Vector2(0, -2)
 death_effect = ExtResource("5_0xhhh")
 
 [node name="SquareEnemy" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("3_s3ych")]

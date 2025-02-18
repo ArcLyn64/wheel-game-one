@@ -100,6 +100,7 @@ var _current_value:WheelPayload ## a WheelPayload object containing the wheel's 
 var current_direction:int = 0 ## where the selector currently is.
 const DIRECTIONS:Array[int] = [0,90,180,270] ## rotation value (in degrees) for the wheel directions. [UP,RIGHT,DOWN,LEFT]
 var target_selections:int = 4 ## how many selections are allowed; default is 4.
+var input_enabled:bool = true
 #endregion
 
 #region Built-In Functions
@@ -135,10 +136,8 @@ func _unhandled_input(_event: InputEvent) -> void:
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if _state != WheelState.AWAITING_SELECTION: return
+	if not input_enabled: return
 
-	if Input.is_action_just_pressed("ui_text_completion_replace"):  # ui_text_completion_replace is tab
-		rotate_slices()
-	
 	# if up, down, left or right is pressed, process that direction input
 	if Input.is_action_just_pressed("wheel_up"): 
 		current_direction=0
