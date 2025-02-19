@@ -14,8 +14,8 @@ extends Area2D
     set(v):
         size = v
         _update_appearance()
-@export var fire_rate:float = 3.0
 @export var point_value:int = 100
+@export var weapon:Weapon = null
 
 @export_group('colors')
 @export var w_color:Color :
@@ -87,4 +87,4 @@ func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return
     if not in_play_area(): return
     
-    _handle_fire(delta)
+    if weapon: weapon.handle_auto_fire(self, delta)

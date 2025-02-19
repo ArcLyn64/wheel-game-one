@@ -261,7 +261,6 @@ size_flags_vertical = 8
 theme_override_constants/separation = 15
 script = ExtResource("6_krvt7")
 items = [NodePath("TextureRect6"), NodePath("TextureRect5"), NodePath("TextureRect4"), NodePath("TextureRect3"), NodePath("TextureRectMax")]
-value = 5
 global_signal = &"lives_update"
 
 [node name="TextureRectMax" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
