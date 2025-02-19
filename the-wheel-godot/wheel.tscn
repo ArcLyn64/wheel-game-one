@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=3 uid="uid://ynmfrkjnnm6r"]
 
 [ext_resource type="Script" path="res://the-wheel-godot/wheel.gd" id="1_jnbfk"]
-[ext_resource type="Texture2D" uid="uid://bgsngvx2gvemu" path="res://assets/wheeltextures/slice1.png" id="2_hflln"]
-[ext_resource type="Texture2D" uid="uid://do6nve628fj42" path="res://assets/wheeltextures/slice2.png" id="3_tc8cr"]
-[ext_resource type="Texture2D" uid="uid://mcjmi4bhyyfd" path="res://assets/wheeltextures/slice3.png" id="4_lnuxd"]
-[ext_resource type="Texture2D" uid="uid://c58kxglsbrtpy" path="res://assets/wheeltextures/slice4.png" id="5_w8unc"]
-[ext_resource type="Texture2D" uid="uid://c7f57bkxn7noc" path="res://assets/wheeltextures/underlay.png" id="6_cgp5b"]
-[ext_resource type="Texture2D" uid="uid://742pxiqvrtvv" path="res://assets/wheeltextures/overlay.png" id="7_kuksd"]
-[ext_resource type="Texture2D" uid="uid://vykvlqf1dvc4" path="res://assets/wheeltextures/selector.png" id="8_6cgcx"]
+[ext_resource type="Texture2D" uid="uid://d26cocb7f5biu" path="res://assets/wheeltextures/slice1.png" id="2_hflln"]
+[ext_resource type="Texture2D" uid="uid://b26d46otswkev" path="res://assets/wheeltextures/slice2.png" id="3_tc8cr"]
+[ext_resource type="Texture2D" uid="uid://b62c2x3fpqy2g" path="res://assets/wheeltextures/slice3.png" id="4_lnuxd"]
+[ext_resource type="Texture2D" uid="uid://cibvjji04v87m" path="res://assets/wheeltextures/slice4.png" id="5_w8unc"]
+[ext_resource type="Texture2D" uid="uid://dq2c0cj6havec" path="res://assets/wheeltextures/underlay.png" id="6_cgp5b"]
+[ext_resource type="Texture2D" uid="uid://cqsjo7cxeno47" path="res://assets/wheeltextures/overlay.png" id="7_kuksd"]
+[ext_resource type="Texture2D" uid="uid://bj1ti43o3pgnc" path="res://assets/wheeltextures/selector.png" id="8_6cgcx"]
 
 [node name="Wheel" type="Control"]
 texture_filter = 1

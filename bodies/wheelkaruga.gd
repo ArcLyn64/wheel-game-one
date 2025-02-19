@@ -212,6 +212,7 @@ func die():
     await get_tree().create_timer(1.0).timeout
     
     # return us to the middle center and respawn us
+    SignalBus.clear_all_bullets.emit()
     wheel.reset()
     show()
     position = Vector2.ZERO

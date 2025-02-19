@@ -40,7 +40,7 @@ debug_color = Color(1, 0.00226397, 0.0755078, 0.42)
 
 [node name="Display" type="Polygon2D" parent="."]
 modulate = Color(0.162066, 0.162066, 0.162066, 1)
-rotation = 8881.36
+rotation = 9217.9
 polygon = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 script = ExtResource("1_ph8qr")
 polarity_w = false
