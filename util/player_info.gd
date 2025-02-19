@@ -2,7 +2,7 @@ extends Node
 
 var player:Wheelkaruga = null
 
-var lives:int = 3 :
+var lives:int = 5 :
     set(v):
         lives = clampi(v, 0, 5)
         SignalBus.lives_update.emit(lives)

@@ -201,10 +201,12 @@ func die():
     hide()
     disable()
     
+    # handle consequences
     PlayerInfo.lives -= 1
     if PlayerInfo.lives <= 0:
         SignalBus.game_over.emit()
         return
+    charge = 0
     
     # wait a sec
     await get_tree().create_timer(1.0).timeout
