@@ -1,6 +1,7 @@
 class_name Weapon
 extends Resource
 
+@export_group("Autofire Properties")
 @export var fire_auto:bool = true
 @export var fire_rate:float = 3.0
 @export var init_timer:float = 0.5
