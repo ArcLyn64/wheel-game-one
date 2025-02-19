@@ -1,16 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://drntdv43cw54v"]
+[gd_scene load_steps=7 format=3 uid="uid://drntdv43cw54v"]
 
 [ext_resource type="Script" path="res://bodies/wheelkaruga.gd" id="1_21xnb"]
 [ext_resource type="PackedScene" uid="uid://ynmfrkjnnm6r" path="res://the-wheel-godot/wheel.tscn" id="1_b7gxp"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="2_weevs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_of8gw"]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_soyih"]
-radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2e4v"]
-radius = 50.0
+radius = 60.0
 
 [node name="Wheelkaruga" type="CharacterBody2D" node_paths=PackedStringArray("wheel", "body", "small_hurtbox", "large_hurtbox")]
 collision_mask = 4
@@ -20,6 +20,7 @@ skew_on_move_deg = 5.0
 skew_per_frame_deg = 0.05
 offset_on_move = 5.0
 offset_per_frame_deg = 0.5
+death_effect = ExtResource("2_weevs")
 w_color = Color(0.89059, 0.89059, 0.89059, 1)
 b_color = Color(0.215902, 0.215902, 0.215902, 1)
 wheel = NodePath("Wheel")
@@ -56,7 +57,6 @@ collision_layer = 2
 collision_mask = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallCollider"]
-visible = false
 shape = SubResource("CircleShape2D_soyih")
 debug_color = Color(0.7, 0, 0.0116665, 0.419608)
 

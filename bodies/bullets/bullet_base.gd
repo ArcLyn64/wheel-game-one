@@ -36,7 +36,12 @@ func _ready() -> void:
 
 func _check_exited_play_area(area:Area2D):
     if area.is_in_group('PlayArea'):
-        get_tree().create_timer(1.0).timeout.connect(destroy.bind(true))
+        get_tree().create_timer(1.0).timeout.connect(func(): if not in_play_area(): destroy.bind(true))
+
+func in_play_area():
+    for a in get_overlapping_areas():
+        if a.is_in_group('PlayArea'): return true
+    return false
 
 func _display_polarity():
     if polarity_w:

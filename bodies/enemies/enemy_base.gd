@@ -51,14 +51,14 @@ func _update_appearance():
 func _display_polarity():
     if display: display.polarity_w = polarity_w
 
-func _in_play_area():
+func in_play_area():
     for a in get_overlapping_areas():
         if a.is_in_group('PlayArea'): return true
     return false
 
 func _handle_collision(a:Area2D):
     if a is Bullet:
-        if _in_play_area():
+        if in_play_area():
             health -= a.damage
             var matching = a.polarity_w == self.polarity_w
             a.destroy()
@@ -85,6 +85,6 @@ func _handle_fire(_delta:float):
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return
-    if not _in_play_area(): return
+    if not in_play_area(): return
     
     _handle_fire(delta)

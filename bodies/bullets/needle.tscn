@@ -9,7 +9,6 @@ rotation = -1.5708
 collision_layer = 8
 collision_mask = 96
 script = ExtResource("1_dnddt")
-speed_curve_time = null
 w_color = Color(0.762404, 0.762404, 0.762404, 1)
 b_color = Color(0.212305, 0.212305, 0.212305, 1)
 death_effect = ExtResource("2_kvgof")

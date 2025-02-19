@@ -1,21 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://c28b6rnn1v3mt"]
+[gd_scene load_steps=5 format=3 uid="uid://c28b6rnn1v3mt"]
 
 [ext_resource type="Script" path="res://bodies/enemies/square_enemy.gd" id="1_4ao4x"]
 [ext_resource type="Script" path="res://effects/spinning_square.gd" id="1_ph8qr"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="2_lkrks"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtxrm"]
 radius = 49.35
 
-[node name="SquareEnemy" type="Area2D" node_paths=PackedStringArray("hurtbox", "display")]
+[node name="SquareEnemy" type="Area2D" node_paths=PackedStringArray("hurtbox", "display") groups=["Enemy"]]
 collision_layer = 32
 collision_mask = 74
 script = ExtResource("1_4ao4x")
 polarity_w = false
 size = 70.0
 fire_rate = 1.0
-point_value = null
 w_color = Color(0.695503, 0.695503, 0.695503, 1)
 b_color = Color(0.162066, 0.162066, 0.162066, 1)
+death_effect = ExtResource("2_lkrks")
 hurtbox = NodePath("Hurtbox")
 display = NodePath("Display")
 
@@ -27,7 +28,7 @@ debug_color = Color(1, 0.00226397, 0.0755078, 0.42)
 
 [node name="Display" type="Polygon2D" parent="."]
 modulate = Color(0.162066, 0.162066, 0.162066, 1)
-rotation = 6914.27
+rotation = 7120.42
 polygon = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 script = ExtResource("1_ph8qr")
 polarity_w = false

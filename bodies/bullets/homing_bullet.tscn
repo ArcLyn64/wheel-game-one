@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://db4augv8u31tl"]
+
+[ext_resource type="Script" path="res://effects/spinning_square.gd" id="1_b0vl6"]
+[ext_resource type="Script" path="res://bodies/bullets/homing_bullet.gd" id="1_lu2iw"]
+[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="2_rfl0o"]
+
+[sub_resource type="Curve" id="Curve_riitf"]
+_data = [Vector2(0, 0.692308), 0.0, 0.0, 0, 0, Vector2(0.252475, 0.296703), 0.0, 0.0, 0, 0, Vector2(0.49505, 0.406593), 0.0, 0.0, 0, 0, Vector2(0.623762, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_vaasi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.844828, 0.89011), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_s542o"]
+curve = SubResource("Curve_vaasi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7xm06"]
+particle_flag_disable_z = true
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = 17.35
+angular_velocity_max = 104.1
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_s542o")
+
+[sub_resource type="Gradient" id="Gradient_3byrm"]
+interpolation_mode = 1
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k6h0v"]
+gradient = SubResource("Gradient_3byrm")
+width = 20
+height = 20
+fill = 2
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4rt7"]
+radius = 14.0
+
+[node name="HomingBullet" type="Area2D" node_paths=PackedStringArray("display")]
+collision_layer = 8
+collision_mask = 96
+script = ExtResource("1_lu2iw")
+display = NodePath("SpinningSquare")
+polarity_w = false
+damage = 10.0
+initial_speed = 2000.0
+speed_curve = SubResource("Curve_riitf")
+speed_curve_time = 2.0
+w_color = Color(0.662452, 0.662452, 0.662452, 1)
+b_color = Color(0.140447, 0.140447, 0.140447, 1)
+death_effect = ExtResource("2_rfl0o")
+
+[node name="SpinningSquare" type="Polygon2D" parent="."]
+modulate = Color(0.140447, 0.140447, 0.140447, 1)
+rotation = 5508.57
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+script = ExtResource("1_b0vl6")
+polarity_w = false
+size = Vector2(20, 20)
+spin_speed = 3.0
+w_color = Color(0.662452, 0.662452, 0.662452, 1)
+b_color = Color(0.140447, 0.140447, 0.140447, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SpinningSquare"]
+texture_filter = 1
+rotation = 1.72219
+process_material = SubResource("ParticleProcessMaterial_7xm06")
+texture = SubResource("GradientTexture2D_k6h0v")
+lifetime = 0.25
+fixed_fps = 60
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_i4rt7")

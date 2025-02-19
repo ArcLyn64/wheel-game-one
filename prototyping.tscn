@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4xsfl4hqnlou"]
+[gd_scene load_steps=22 format=3 uid="uid://c4xsfl4hqnlou"]
 
 [ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
 [ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
 [ext_resource type="Script" path="res://handlers/bullet_master.gd" id="2_m0l5e"]
 [ext_resource type="FontFile" uid="uid://rambf55exqdn" path="res://assets/fonts/LTStopwatch-Regular.ttf" id="2_noei1"]
-[ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="3_s3ych"]
-[ext_resource type="PackedScene" uid="uid://b1rdu52dl0rgk" path="res://effects/pop_effect.tscn" id="5_0xhhh"]
+[ext_resource type="Script" path="res://formations/formation_spawner.gd" id="3_242y4"]
 [ext_resource type="Script" path="res://ui/icon_counter.gd" id="6_krvt7"]
 [ext_resource type="Script" path="res://ui/score_meter.gd" id="8_lfc77"]
 
@@ -42,12 +41,12 @@ height = 32
 fill_from = Vector2(0.353211, 0.357798)
 fill_to = Vector2(1, 1)
 
-[sub_resource type="Gradient" id="Gradient_3k60i"]
+[sub_resource type="Gradient" id="Gradient_qswtf"]
 offsets = PackedFloat32Array(0.00649351, 1)
 colors = PackedColorArray(0.482712, 1.8049e-07, 0.176466, 1, 0.914199, 0.362604, 0.241199, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qjlfw"]
-gradient = SubResource("Gradient_3k60i")
+gradient = SubResource("Gradient_qswtf")
 fill_from = Vector2(0.458716, 0)
 fill_to = Vector2(0.559633, 1)
 
@@ -195,32 +194,25 @@ process_mode = 3
 determines_size = NodePath("..")
 
 [node name="GameAreaBackground" type="TextureRect" parent="MainUIElements/GameAreaContainer"]
-custom_minimum_size = Vector2(720, 0)
+custom_minimum_size = Vector2(756, 1080)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_qjlfw")
 
-[node name="EntitiyCropper" type="Polygon2D" parent="MainUIElements/GameAreaContainer"]
+[node name="EntityCropper" type="Polygon2D" parent="MainUIElements/GameAreaContainer"]
 clip_children = 1
 polygon = PackedVector2Array(756, 0, 0, 0, 0, 1080, 756, 1080)
 
-[node name="BulletMaster" type="Node2D" parent="MainUIElements/GameAreaContainer/EntitiyCropper"]
+[node name="FormationSpawner" type="Node2D" parent="MainUIElements/GameAreaContainer/EntityCropper"]
+script = ExtResource("3_242y4")
+
+[node name="BulletMaster" type="Node2D" parent="MainUIElements/GameAreaContainer/EntityCropper"]
 script = ExtResource("2_m0l5e")
 
-[node name="Craft" type="Node2D" parent="MainUIElements/GameAreaContainer/EntitiyCropper"]
-
-[node name="PlayerSpawnPoint" type="Node2D" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft"]
+[node name="PlayerSpawnPoint" type="Node2D" parent="MainUIElements/GameAreaContainer/EntityCropper"]
 position = Vector2(380, 950)
 
-[node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft/PlayerSpawnPoint" instance=ExtResource("1_hrx8i")]
+[node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntityCropper/PlayerSpawnPoint" instance=ExtResource("1_hrx8i")]
 position = Vector2(0, -2)
-death_effect = ExtResource("5_0xhhh")
-
-[node name="SquareEnemy" parent="MainUIElements/GameAreaContainer/EntitiyCropper/Craft" instance=ExtResource("3_s3ych")]
-position = Vector2(352, 212)
-point_value = 100
-w_color = Color(0.695503, 0.695503, 0.695503, 1)
-b_color = Color(0.162066, 0.162066, 0.162066, 1)
-death_effect = ExtResource("5_0xhhh")
 
 [node name="RightUI" type="MarginContainer" parent="MainUIElements"]
 custom_minimum_size = Vector2(500, 0)

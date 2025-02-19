@@ -46,6 +46,7 @@ signal polarity_update(is_white:bool)
 signal firepower_update(power:int)
 
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/needle.tscn')
+@onready var homing_bullet_scene:PackedScene = preload('res://bodies/bullets/homing_bullet.tscn')
 
 var enabled:bool = true :
     set(v):
@@ -72,8 +73,28 @@ func _handle_movement():
     body.skew = move_toward(body.skew, direction.x * deg_to_rad(skew_on_move_deg), skew_per_frame_deg)
     body.position.y = move_toward(body.position.y, -direction.y * offset_on_move, offset_per_frame_deg)
 
-func _mega_laser(_strength:int):
-    pass # TODO
+func _mega_laser(strength:int):
+    # get targets:
+    var num_targets:int = strength * charge
+    charge = 0 # spend our charge to fire
+    var targets:Array = []
+    while num_targets > len(targets):
+        var all_possible_targets:Array = get_tree().get_nodes_in_group('Enemy').filter(func(e): return e is Enemy and e.in_play_area())
+        all_possible_targets.shuffle()
+        if len(all_possible_targets) == 0: targets += [null]
+        elif len(all_possible_targets) < num_targets: targets += all_possible_targets
+        else: targets += all_possible_targets.slice(0, num_targets - len(targets))
+    
+    # fire bullets
+    for target:Enemy in targets:
+        _instantiate_homing_bullet(target)
+        
+func _instantiate_homing_bullet(target:Enemy):
+    var bullet:HomingBullet = homing_bullet_scene.instantiate() 
+    bullet.polarity_w = self.polarity_w
+    bullet.target = target
+    bullet.direction = Vector2.DOWN.rotated((randf() - 0.5) * PI / 2)
+    SignalBus.make_bullet.emit(self, bullet, Vector2.ZERO)
 
 func _instantiate_bullet(_position:Vector2):
     var bullet:Bullet = bullet_scene.instantiate()
@@ -126,7 +147,7 @@ func _handle_wheel_input(_wheel_value):
 
 func _handle_fire_input(delta:float):
     _fire_rate_timer -= delta
-    if Input.is_action_pressed("fire") and _fire_rate_timer <= 0:
+    if Input.is_action_pressed("fire") and _fire_rate_timer <= 0 and enabled:
         _fire()
         _fire_rate_timer = fire_rate
 
@@ -151,18 +172,18 @@ func _handle_collision_small_area(area:Area2D):
 func disable():
     enabled = false
     wheel.input_enabled = false
-    small_hurtbox.monitorable = false
-    small_hurtbox.monitoring = false
-    large_hurtbox.monitorable = false
-    large_hurtbox.monitoring = false
+    small_hurtbox.set_deferred('monitorable', false)
+    small_hurtbox.set_deferred('monitoring', false)
+    large_hurtbox.set_deferred('monitorable', false)
+    large_hurtbox.set_deferred('monitoring', false)
 
 func enable():
     enabled = true
     wheel.input_enabled = true
-    small_hurtbox.monitorable = true
-    small_hurtbox.monitoring = true
-    large_hurtbox.monitorable = true
-    large_hurtbox.monitoring = true
+    small_hurtbox.set_deferred('monitorable', true)
+    small_hurtbox.set_deferred('monitoring', true)
+    large_hurtbox.set_deferred('monitorable', true)
+    large_hurtbox.set_deferred('monitoring', true)
 
 func die():
     # do the death effect

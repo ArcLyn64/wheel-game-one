@@ -15,8 +15,8 @@ func _instantiate_bullet(_direction:Vector2):
 func _fire():
     var target = PlayerInfo.player_location(self)
     _instantiate_bullet(target)
-    _instantiate_bullet(target.rotated(deg_to_rad(20)))
-    _instantiate_bullet(target.rotated(deg_to_rad(-20)))
+    _instantiate_bullet(target.rotated(deg_to_rad(10)))
+    _instantiate_bullet(target.rotated(deg_to_rad(-10)))
 
 func _handle_fire(delta:float):
     _fire_rate_timer -= delta
