@@ -53,12 +53,8 @@ signal firepower_update(power:int)
 
 var enabled:bool = true :
     set(v):
-        if v and enabled != v:
-            enabled = v
-            enable()
-        elif not v and enabled != v:
-            enabled = v
-            disable()
+        enabled = v
+        if wheel: wheel.input_enabled = v
 
 var _fire_rate_timer = 0.0
 
@@ -162,33 +158,19 @@ func _handle_wheel_full():
 
 # destroy matching bullets and add their damage to score
 func _handle_collision_large_area(area:Area2D):
+    if not enabled :return
     if area is Bullet and area.polarity_w == self.polarity_w:
         SignalBus.award_points.emit(area.damage)
         area.destroy()
 
 # die to mismatched bullets or intersecting with craft
 func _handle_collision_small_area(area:Area2D):
+    if not enabled :return
     if area is Bullet and area.polarity_w != self.polarity_w:
         die()
     if area is Enemy:
         area.die(false)
         die()
-
-func disable():
-    enabled = false
-    wheel.input_enabled = false
-    small_hurtbox.set_deferred('monitorable', false)
-    small_hurtbox.set_deferred('monitoring', false)
-    large_hurtbox.set_deferred('monitorable', false)
-    large_hurtbox.set_deferred('monitoring', false)
-
-func enable():
-    enabled = true
-    wheel.input_enabled = true
-    small_hurtbox.set_deferred('monitorable', true)
-    small_hurtbox.set_deferred('monitoring', true)
-    large_hurtbox.set_deferred('monitorable', true)
-    large_hurtbox.set_deferred('monitoring', true)
 
 func die():
     # do the death effect
@@ -205,7 +187,7 @@ func die():
     
     # hide ourselves
     hide()
-    disable()
+    enabled = false
     
     # handle consequences
     PlayerInfo.lives -= 1
@@ -225,7 +207,7 @@ func die():
     
     # become hittable again
     self.modulate.a = 1
-    enable()
+    enabled = true
 
 func initialize(_enable:bool = true):
     SignalBus.clear_all_bullets.emit()
@@ -233,7 +215,7 @@ func initialize(_enable:bool = true):
     show()
     position = Vector2.ZERO
     charge = 0
-    if enable: enable()
+    if _enable: enabled = true
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return
