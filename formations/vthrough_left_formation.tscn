@@ -30,7 +30,7 @@ bullet_scene = ExtResource("3_yokhi")
 num_bullets = 1
 firing_cone = 0.0
 fire_auto = true
-fire_rate = 10.0
+fire_rate = 3.0
 init_timer = 0.5
 
 [node name="Formation" type="Path2D" node_paths=PackedStringArray("members")]

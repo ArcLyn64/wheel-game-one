@@ -31,13 +31,13 @@ num_bullets = 10
 firing_cone = 40.0
 fire_auto = true
 fire_rate = 3.0
-init_timer = 0.5
+init_timer = 1.0
 
 [node name="Formation" type="Path2D" node_paths=PackedStringArray("members")]
 curve = SubResource("Curve2D_4rd0o")
 script = ExtResource("1_ruhod")
 progress_curve = SubResource("Curve_bjuqr")
-members = [NodePath("PathFollow2D"), NodePath("")]
+members = [NodePath("PathFollow2D")]
 
 [node name="DebugGameArea" type="TextureRect" parent="."]
 visible = false
@@ -60,7 +60,6 @@ weapon = SubResource("Resource_61v7i")
 
 [node name="SquareEnemy2" parent="PathFollow2D" instance=ExtResource("2_gqr7t")]
 position = Vector2(-3.05176e-05, 300)
-scale = Vector2(1, 1)
 health = 50.0
 size = 140.0
 weapon = SubResource("Resource_61v7i")

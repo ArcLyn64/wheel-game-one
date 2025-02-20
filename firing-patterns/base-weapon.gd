@@ -24,4 +24,5 @@ func handle_auto_fire(source:Node2D, delta:float):
     if _fire_rate_timer >= timer_threshold:
         fire(source)
         _fire_rate_timer = 0
+        _has_fired = true
 

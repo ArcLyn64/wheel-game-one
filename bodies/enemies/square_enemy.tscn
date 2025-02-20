@@ -12,7 +12,7 @@ bullet_scene = ExtResource("2_ytrgn")
 num_bullets = 3
 firing_cone = 20.0
 fire_auto = true
-fire_rate = 3.0
+fire_rate = 1.0
 init_timer = 0.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rtxrm"]
@@ -40,7 +40,7 @@ debug_color = Color(1, 0.00226397, 0.0755078, 0.42)
 
 [node name="Display" type="Polygon2D" parent="."]
 modulate = Color(0.162066, 0.162066, 0.162066, 1)
-rotation = 26496.6
+rotation = 26520.4
 polygon = PackedVector2Array(-35, -35, 35, -35, 35, 35, -35, 35)
 script = ExtResource("1_ph8qr")
 polarity_w = false
