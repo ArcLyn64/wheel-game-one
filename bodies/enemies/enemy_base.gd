@@ -39,6 +39,9 @@ extends Area2D
 @export var hurtbox:CollisionShape2D
 @export var display:SpinningShape
 
+@onready var death_sfx:AudioStream = preload('res://assets/sfx/enemy_death.wav')
+@onready var hit_sfx:AudioStream = preload('res://assets/sfx/hit_sfx.wav')
+
 func _ready() -> void:
     _update_appearance()
     _display_polarity()
@@ -64,6 +67,8 @@ func _handle_collision(a:Area2D):
             a.destroy()
             if health < 0:
                 die(matching)
+            else:
+                AudioManager.play_sound(hit_sfx)
         else:
             a.despawn()
 
@@ -78,6 +83,7 @@ func die(matching:bool, despawn:bool = false):
             effect.position = self.position
         effect.radius = size / 2
         get_parent().add_child(effect)
+        AudioManager.play_sound(death_sfx)
     queue_free()   
 
 func _handle_fire(_delta:float):

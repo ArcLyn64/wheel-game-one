@@ -1,0 +1,29 @@
+{
+    "properties": {
+        "attackTime": 0,
+        "baseFrequency": 0.48938,
+        "changeAmount": 0,
+        "changeSpeed": 0,
+        "decayTime": 0.14521821120689646,
+        "deltaSlide": 0,
+        "dutySweep": 0,
+        "hpFilterCutoff": 0.29142,
+        "hpFilterCutoffSweep": 0,
+        "lpFilterCutoff": 1,
+        "lpFilterCutoffSweep": 0,
+        "lpFilterResonance": 0,
+        "minFrequency": 0,
+        "phaserOffset": 0,
+        "phaserSweep": 0,
+        "repeatSpeed": 0,
+        "slide": -0.5658,
+        "squareDuty": 0.09876,
+        "sustainPunch": 0,
+        "sustainTime": 0.05001,
+        "vibratoDepth": 0,
+        "vibratoSpeed": 0,
+        "volume": 0.007846174568965712,
+        "waveForm": "Noise"
+    },
+    "version": 1
+}

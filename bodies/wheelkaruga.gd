@@ -48,6 +48,9 @@ signal firepower_update(power:int)
 @onready var bullet_scene:PackedScene = preload('res://bodies/bullets/needle.tscn')
 @onready var homing_bullet_scene:PackedScene = preload('res://bodies/bullets/homing_bullet.tscn')
 
+@onready var death_sfx:AudioStream = preload('res://assets/sfx/player_death.wav')
+@onready var fire_sfx:AudioStream = preload('res://assets/sfx/fire_sfx.wav')
+
 var enabled:bool = true :
     set(v):
         if v and enabled != v:
@@ -117,6 +120,7 @@ func _fire():
             _instantiate_bullet(Vector2(-10, -65))
             _instantiate_bullet(Vector2(20, -60))
             _instantiate_bullet(Vector2(-20, -60))
+    AudioManager.play_sound(fire_sfx)
 
 func _charge(strength:int):
     match strength:
@@ -196,6 +200,7 @@ func die():
         effect.position = self.position
     effect.radius = 50
     get_parent().add_child(effect)
+    AudioManager.play_sound(death_sfx)
     
     # hide ourselves
     hide()
