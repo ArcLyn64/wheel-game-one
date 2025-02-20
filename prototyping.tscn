@@ -220,7 +220,6 @@ position = Vector2(0, -2)
 
 [node name="MenuContainer" parent="MainUIElements/GameAreaContainer" instance=ExtResource("6_3uv2o")]
 layout_mode = 2
-selected = 0
 
 [node name="RightUI" type="MarginContainer" parent="MainUIElements"]
 custom_minimum_size = Vector2(500, 0)

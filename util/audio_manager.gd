@@ -5,7 +5,7 @@ extends Node
 # naturally modified for this game
 
 # applied to all played music tracks
-const MUSIC_VOLUME_MODIFIER:float = -5.0
+const MUSIC_VOLUME_MODIFIER:float = 10.0
 # applied to all played sound effects
 const SFX_VOLUME_MODIFIER:float = 10.0
 
@@ -35,9 +35,20 @@ var sound_players:Array = []
 @onready var music_player:AudioStreamPlayer = music_player_1
 @onready var sounds = $Sounds
 
+@onready var bgm:AudioStream = preload("res://assets/bgm/siiva-bad-apple-loopable.mp3")
+
 func _ready() -> void:
     _update_musicplayer_volumes()
     _update_soundplayer_volumes()
+    SignalBus.game_over.connect(func():
+        fade_music_out(2)
+        await get_tree().create_timer(2).timeout
+        stop_music()
+    )
+    SignalBus.new_game.connect(func():
+        fade_music_in(2)
+        play_music(bgm, music_player.get_playback_position())
+    )
 
 func _update_musicplayer_volumes():
     if music_volume > MINVOLUME:
@@ -57,10 +68,11 @@ func _update_soundplayer_volumes():
 
 func play_music(file, play_at:float=0.0):
     if music_volume == MINVOLUME: return
-    if music_player.is_playing and music_player.stream == file: return
+    if music_player.is_playing() and music_player.stream == file: return
     music_player.stream = file;
     # music_player.volume_db = music_volume;
     music_player.play(play_at);
+    get_tree().create_timer(1.0).timeout.connect(func(): print_debug(music_player.get_playback_position()))
 
 
 func stop_music():
