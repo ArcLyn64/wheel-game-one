@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3hui0a0qiqkd"]
+
+[ext_resource type="Script" path="res://ui/menu_container.gd" id="1_bqnrh"]
+[ext_resource type="FontFile" uid="uid://na8mje3kwmms" path="res://assets/fonts/Audex.ttf" id="1_x4w4k"]
+[ext_resource type="PackedScene" uid="uid://5yg1nyskn41n" path="res://ui/menu_option.tscn" id="3_ql3ew"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_mu5yx"]
+font = ExtResource("1_x4w4k")
+font_size = 56
+
+[node name="MenuContainer" type="MarginContainer" node_paths=PackedStringArray("options")]
+script = ExtResource("1_bqnrh")
+options = [NodePath("Menu/Options/NGOption"), NodePath("Menu/Options/Quit")]
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Title" type="Label" parent="Menu"]
+layout_mode = 2
+text = "WHEEL-K TECH DEMO"
+label_settings = SubResource("LabelSettings_mu5yx")
+horizontal_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="Menu"]
+layout_mode = 2
+
+[node name="NGOption" parent="Menu/Options" instance=ExtResource("3_ql3ew")]
+layout_mode = 2
+value = "start"
+
+[node name="Quit" parent="Menu/Options" instance=ExtResource("3_ql3ew")]
+layout_mode = 2
+text = "Quit"
+selected = false
+value = "quit"

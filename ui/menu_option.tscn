@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://5yg1nyskn41n"]
+
+[ext_resource type="Script" path="res://ui/menu_option.gd" id="1_3irrp"]
+[ext_resource type="FontFile" uid="uid://na8mje3kwmms" path="res://assets/fonts/Audex.ttf" id="1_c1ewo"]
+
+[sub_resource type="Gradient" id="Gradient_28jjk"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p2o5t"]
+gradient = SubResource("Gradient_28jjk")
+width = 128
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ebsau"]
+font = ExtResource("1_c1ewo")
+font_size = 24
+
+[node name="MarginContainer" type="MarginContainer" node_paths=PackedStringArray("highlight", "label")]
+script = ExtResource("1_3irrp")
+text = "Insert Credit"
+selected = true
+value = null
+highlight = NodePath("TextureRect")
+label = NodePath("StartNewGame")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0, 0.666667, 1, 1)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_p2o5t")
+
+[node name="StartNewGame" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Insert Credit"
+label_settings = SubResource("LabelSettings_ebsau")
+horizontal_alignment = 1
+vertical_alignment = 1

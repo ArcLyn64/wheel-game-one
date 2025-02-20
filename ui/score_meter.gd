@@ -17,3 +17,4 @@ func _update_display():
 func _ready() -> void:
     SignalBus.award_points.connect(func(v): value += v)
     SignalBus.reset_score.connect(func(): value = 0)
+    SignalBus.new_game.connect(func(): value = 0)

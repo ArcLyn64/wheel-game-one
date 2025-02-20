@@ -1,10 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://c4xsfl4hqnlou"]
+[gd_scene load_steps=24 format=3 uid="uid://c4xsfl4hqnlou"]
 
 [ext_resource type="PackedScene" uid="uid://drntdv43cw54v" path="res://bodies/wheelkaruga.tscn" id="1_hrx8i"]
 [ext_resource type="PackedScene" uid="uid://b7agyui6o8fk" path="res://bodies/play_area_border.tscn" id="1_i3bai"]
 [ext_resource type="Script" path="res://handlers/bullet_master.gd" id="2_m0l5e"]
 [ext_resource type="FontFile" uid="uid://rambf55exqdn" path="res://assets/fonts/LTStopwatch-Regular.ttf" id="2_noei1"]
+[ext_resource type="Script" path="res://ui/fade_with_game.gd" id="3_5fgr5"]
 [ext_resource type="Script" path="res://formations/formation_spawner.gd" id="3_242y4"]
+[ext_resource type="PackedScene" uid="uid://d3hui0a0qiqkd" path="res://ui/menu_container.tscn" id="6_3uv2o"]
 [ext_resource type="Script" path="res://ui/icon_counter.gd" id="6_krvt7"]
 [ext_resource type="Script" path="res://ui/score_meter.gd" id="8_lfc77"]
 
@@ -199,8 +201,10 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_qjlfw")
 
 [node name="EntityCropper" type="Polygon2D" parent="MainUIElements/GameAreaContainer"]
+modulate = Color(1, 1, 1, 0)
 clip_children = 1
 polygon = PackedVector2Array(756, 0, 0, 0, 0, 1080, 756, 1080)
+script = ExtResource("3_5fgr5")
 
 [node name="FormationSpawner" type="Node2D" parent="MainUIElements/GameAreaContainer/EntityCropper"]
 script = ExtResource("3_242y4")
@@ -213,6 +217,10 @@ position = Vector2(380, 950)
 
 [node name="Wheelkaruga" parent="MainUIElements/GameAreaContainer/EntityCropper/PlayerSpawnPoint" instance=ExtResource("1_hrx8i")]
 position = Vector2(0, -2)
+
+[node name="MenuContainer" parent="MainUIElements/GameAreaContainer" instance=ExtResource("6_3uv2o")]
+layout_mode = 2
+selected = 0
 
 [node name="RightUI" type="MarginContainer" parent="MainUIElements"]
 custom_minimum_size = Vector2(500, 0)
@@ -264,30 +272,35 @@ items = [NodePath("TextureRect6"), NodePath("TextureRect5"), NodePath("TextureRe
 global_signal = &"lives_update"
 
 [node name="TextureRectMax" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_vpb5u")
 
 [node name="TextureRect3" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_a36h4")
 
 [node name="TextureRect4" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_a36h4")
 
 [node name="TextureRect5" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_a36h4")
 
 [node name="TextureRect6" type="TextureRect" parent="MainUIElements/RightUI/LifeDisplay/LifeContainer/ResourceList"]
+visible = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 3

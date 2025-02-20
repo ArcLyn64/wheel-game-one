@@ -64,6 +64,7 @@ var _fire_rate_timer = 0.0
 
 func _ready() -> void:
     PlayerInfo.attach_player(self)
+    SignalBus.new_game.connect(initialize)
     if wheel:
         wheel.new_dir_chosen.connect(_handle_wheel_input)
         wheel.puzzle_finished.connect(_handle_wheel_full)
@@ -211,16 +212,12 @@ func die():
     if PlayerInfo.lives <= 0:
         SignalBus.game_over.emit()
         return
-    charge = 0
     
     # wait a sec
     await get_tree().create_timer(1.0).timeout
     
     # return us to the middle center and respawn us
-    SignalBus.clear_all_bullets.emit()
-    wheel.reset()
-    show()
-    position = Vector2.ZERO
+    initialize(false) # but don't make us hittable just yet
     self.modulate.a = 0.5
 
     # wait a sec
@@ -230,6 +227,13 @@ func die():
     self.modulate.a = 1
     enable()
 
+func initialize(_enable:bool = true):
+    SignalBus.clear_all_bullets.emit()
+    wheel.reset()
+    show()
+    position = Vector2.ZERO
+    charge = 0
+    if enable: enable()
 
 func _physics_process(delta: float) -> void:
     if Engine.is_editor_hint(): return
