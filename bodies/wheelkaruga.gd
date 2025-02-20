@@ -69,7 +69,7 @@ func _ready() -> void:
         wheel.new_dir_chosen.connect(_handle_wheel_input)
         wheel.puzzle_finished.connect(_handle_wheel_full)
     if small_hurtbox: small_hurtbox.area_entered.connect(_handle_collision_small_area)
-    if large_hurtbox: small_hurtbox.area_entered.connect(_handle_collision_large_area)
+    if large_hurtbox: large_hurtbox.area_entered.connect(_handle_collision_large_area)
 
 func _handle_movement():
     var direction := Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down"))
