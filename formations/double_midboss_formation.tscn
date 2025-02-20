@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://big05copbhauu"]
+
+[ext_resource type="Script" path="res://formations/formation.gd" id="1_ruhod"]
+[ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="2_gqr7t"]
+[ext_resource type="PackedScene" uid="uid://ccme56t3608ar" path="res://bodies/bullets/ball.tscn" id="3_bp0do"]
+[ext_resource type="Script" path="res://firing-patterns/bullet_fan.gd" id="4_fjfh3"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rd0o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 367, -269, 0, 0, 0, 0, 368, 231)
+}
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bjuqr"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.356436, 1), 0.147985, 0.147985, 0, 0, Vector2(0.712871, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_3k60i"]
+offsets = PackedFloat32Array(0.00649351, 1)
+colors = PackedColorArray(0.482712, 1.8049e-07, 0.176466, 1, 0.914199, 0.362604, 0.241199, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p2qqe"]
+gradient = SubResource("Gradient_3k60i")
+fill_from = Vector2(0.458716, 0)
+fill_to = Vector2(0.559633, 1)
+
+[sub_resource type="Resource" id="Resource_61v7i"]
+script = ExtResource("4_fjfh3")
+bullet_scene = ExtResource("3_bp0do")
+num_bullets = 10
+firing_cone = 40.0
+fire_auto = true
+fire_rate = 3.0
+init_timer = 0.5
+
+[node name="Formation" type="Path2D" node_paths=PackedStringArray("members")]
+curve = SubResource("Curve2D_4rd0o")
+script = ExtResource("1_ruhod")
+progress_curve = SubResource("Curve_bjuqr")
+members = [NodePath("PathFollow2D"), NodePath("")]
+
+[node name="DebugGameArea" type="TextureRect" parent="."]
+visible = false
+show_behind_parent = true
+custom_minimum_size = Vector2(720, 1080)
+texture = SubResource("GradientTexture2D_p2qqe")
+metadata/_edit_use_anchors_ = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(517, -269.3)
+rotation = 1.5688
+v_offset = -150.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D" instance=ExtResource("2_gqr7t")]
+polarity_w = true
+health = 50.0
+size = 140.0
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D" instance=ExtResource("2_gqr7t")]
+position = Vector2(-3.05176e-05, 300)
+scale = Vector2(1, 1)
+health = 50.0
+size = 140.0
+weapon = SubResource("Resource_61v7i")

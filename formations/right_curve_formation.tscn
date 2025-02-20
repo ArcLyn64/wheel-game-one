@@ -10,7 +10,7 @@ _data = {
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_bjuqr"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.415888, 0.461538), 0.0, 0.0, 0, 0, Vector2(0.621495, 0.67033), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.470297, 0.549451), 0.147985, 0.147985, 0, 0, Vector2(0.529703, 0.549451), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_3k60i"]

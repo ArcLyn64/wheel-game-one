@@ -5,6 +5,14 @@ extends Node2D
 @onready var formations = [
     preload("res://formations/left_curve_formation.tscn"),
     preload("res://formations/right_curve_formation.tscn"),
+    preload("res://formations/vertical_black_formation.tscn"),
+    preload("res://formations/vertical_white_formation.tscn"),
+    preload("res://formations/vertical_zebra_formation.tscn"),
+    preload("res://formations/vthrough_center_formation.tscn"),
+    preload("res://formations/vthrough_left_formation.tscn"),
+    preload("res://formations/vthrough_right_formation.tscn"),
+    preload("res://formations/vthrough_horizontal_formation.tscn"),
+    preload("res://formations/double_midboss_formation.tscn"),
 ]
 
 var game_over:bool = true

@@ -1,0 +1,227 @@
+[gd_scene load_steps=10 format=3 uid="uid://bp3aom3bjofkt"]
+
+[ext_resource type="Script" path="res://formations/formation.gd" id="1_my8be"]
+[ext_resource type="PackedScene" uid="uid://c28b6rnn1v3mt" path="res://bodies/enemies/square_enemy.tscn" id="2_cljqh"]
+[ext_resource type="PackedScene" uid="uid://ccme56t3608ar" path="res://bodies/bullets/ball.tscn" id="3_pvg01"]
+[ext_resource type="Script" path="res://firing-patterns/bullet_fan.gd" id="4_wcm7j"]
+
+[sub_resource type="Curve2D" id="Curve2D_4rd0o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -66, 95, 0, 0, 0, 0, 829, 95)
+}
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_bjuqr"]
+_data = [Vector2(0, 0), 0.0, 1.06211, 0, 0, Vector2(1, 1), 1.25275, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_3k60i"]
+offsets = PackedFloat32Array(0.00649351, 1)
+colors = PackedColorArray(0.482712, 1.8049e-07, 0.176466, 1, 0.914199, 0.362604, 0.241199, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p2qqe"]
+gradient = SubResource("Gradient_3k60i")
+fill_from = Vector2(0.458716, 0)
+fill_to = Vector2(0.559633, 1)
+
+[sub_resource type="Resource" id="Resource_61v7i"]
+script = ExtResource("4_wcm7j")
+bullet_scene = ExtResource("3_pvg01")
+num_bullets = 1
+firing_cone = 0.0
+fire_auto = true
+fire_rate = 10.0
+init_timer = 0.5
+
+[node name="Formation" type="Path2D" node_paths=PackedStringArray("members")]
+curve = SubResource("Curve2D_4rd0o")
+script = ExtResource("1_my8be")
+progress_curve = SubResource("Curve_bjuqr")
+members = [NodePath("PathFollow2D"), NodePath("PathFollow2D2"), NodePath("PathFollow2D3"), NodePath("PathFollow2D4"), NodePath("PathFollow2D5"), NodePath("PathFollow2D6"), NodePath("PathFollow2D7"), NodePath("PathFollow2D8"), NodePath("PathFollow2D9")]
+
+[node name="DebugGameArea" type="TextureRect" parent="."]
+visible = false
+show_behind_parent = true
+custom_minimum_size = Vector2(720, 1080)
+texture = SubResource("GradientTexture2D_p2qqe")
+metadata/_edit_use_anchors_ = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D" instance=ExtResource("2_cljqh")]
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D2" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D2" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D2" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D3" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D3" instance=ExtResource("2_cljqh")]
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D3" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D4" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D4" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D4" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D5" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D5" instance=ExtResource("2_cljqh")]
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D5" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D6" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D6" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D6" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D7" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D7" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D7" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D8" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D8" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D8" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="PathFollow2D9" type="PathFollow2D" parent="."]
+position = Vector2(-66, 45)
+v_offset = -50.0
+loop = false
+
+[node name="SquareEnemy" parent="PathFollow2D9" instance=ExtResource("2_cljqh")]
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")
+
+[node name="SquareEnemy2" parent="PathFollow2D9" instance=ExtResource("2_cljqh")]
+position = Vector2(0, 100)
+scale = Vector2(1, 1)
+polarity_w = true
+health = 5.0
+size = 40.0
+point_value = 50
+weapon = SubResource("Resource_61v7i")

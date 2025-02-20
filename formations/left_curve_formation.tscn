@@ -10,8 +10,8 @@ _data = {
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_bjuqr"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.415888, 0.461538), 0.0, 0.0, 0, 0, Vector2(0.621495, 0.67033), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0), 0.0, 1.06211, 0, 0, Vector2(1, 1), 1.25275, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Gradient" id="Gradient_3k60i"]
 offsets = PackedFloat32Array(0.00649351, 1)
