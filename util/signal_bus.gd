@@ -10,3 +10,4 @@ signal lives_update(lives:int)
 signal energy_update(energy:int)
 
 signal game_over()
+signal new_game()

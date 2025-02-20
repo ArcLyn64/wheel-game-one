@@ -166,7 +166,7 @@ func _handle_collision_small_area(area:Area2D):
     if area is Bullet and area.polarity_w != self.polarity_w:
         die()
     if area is Enemy:
-        area.die()
+        area.die(false)
         die()
 
 func disable():
